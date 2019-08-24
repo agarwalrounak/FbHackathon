@@ -18,6 +18,10 @@ window.onload = function () {
 		document.getElementById('hold').style.display = "inline";
 		document.getElementById('stickman').style.display = "inline";
 
+		myStickman = document.getElementById("stickman");
+		context = myStickman.getContext('2d');
+		context.clearRect(0, 0, 400, 400);
+
 		// alert("hello");
 		var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
 			'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
@@ -304,6 +308,10 @@ window.onload = function () {
 		
 		document.getElementById('hold').style.display = "inline";
 		document.getElementById('stickman').style.display = "inline";
+
+		myStickman = document.getElementById("stickman");
+		context = myStickman.getContext('2d');
+		context.clearRect(0, 0, 400, 400);
 
 		// alert("hello");
 		var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
