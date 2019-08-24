@@ -50,7 +50,7 @@ window.onload = function () {
 			for (var i = 0; i < alphabet.length; i++) {
 				letters.id = 'alphabet';
 				list = document.createElement('li');
-				list.id = 'letter';
+				list.id = alphabet[i];
 				list.innerHTML = alphabet[i];
 				check();
 				myButtons.appendChild(letters);
@@ -122,10 +122,18 @@ window.onload = function () {
 			showLives.innerHTML = "You have " + lives + " lives";
 			if (lives < 1) {
 				showLives.innerHTML = "Game Over";
+				// console.log(document.getElementById('z'))
+				for (var i = 0; i < alphabet.length; i++) {
+					document.getElementById(alphabet[i]).onclick = null;
+				}
+
 			}
 			for (var i = 0; i < geusses.length; i++) {
 				if (counter + space === geusses.length) {
 					showLives.innerHTML = "You Win!";
+					for (var i = 0; i < alphabet.length; i++) {
+						document.getElementById(alphabet[i]).onclick = null;
+					}
 				}
 			}
 		};
@@ -350,7 +358,7 @@ window.onload = function () {
 			for (var i = 0; i < alpha.length; i++) {
 				letters.id = 'alphabet';
 				list = document.createElement('li');
-				list.id = 'letter';
+				list.id = alphabet[i];
 				list.innerHTML = "<img src=\"./images/"+alpha[i]+".png\" width=\"30px\" height=\"30px\">";
 				check();
 				myButtons.appendChild(letters);
@@ -414,10 +422,16 @@ window.onload = function () {
 			showLives.innerHTML = "You have " + lives + " lives";
 			if (lives < 1) {
 				showLives.innerHTML = "Game Over";
+				for (var i = 0; i < alphabet.length; i++) {
+					document.getElementById(alphabet[i]).onclick = null;
+				}
 			}
 			for (var i = 0; i < geusses.length; i++) {
 				if (counter + space === geusses.length) {
 					showLives.innerHTML = "You Win!";
+					for (var i = 0; i < alphabet.length; i++) {
+						document.getElementById(alphabet[i]).onclick = null;
+					}
 				}
 			}
 		};
@@ -695,7 +709,7 @@ window.onload = function () {
 			for (var i = 0; i < alphabet.length; i++) {
 				letters.id = 'alphabet';
 				list = document.createElement('li');
-				list.id = 'letter';
+				list.id = alphabet[i];
 				list.innerHTML = alphabet[i];
 				check();
 				myButtons.appendChild(letters);
@@ -767,10 +781,16 @@ window.onload = function () {
 			showLives.innerHTML = "You have " + lives + " lives";
 			if (lives < 1) {
 				showLives.innerHTML = "Game Over";
+				for (var i = 0; i < alphabet.length; i++) {
+					document.getElementById(alphabet[i]).onclick = null;
+				}
 			}
 			for (var i = 0; i < geusses.length; i++) {
 				if (counter + space === geusses.length) {
 					showLives.innerHTML = "You Win!";
+					for (var i = 0; i < alphabet.length; i++) {
+						document.getElementById(alphabet[i]).onclick = null;
+					}
 				}
 			}
 		}
