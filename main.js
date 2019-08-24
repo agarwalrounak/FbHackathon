@@ -2,7 +2,8 @@ window.onload = function () {
 
 	document.getElementById("sign").onclick = function sign() {
 
-		document.getElementById('para').style.display = "inline";
+		document.getElementById('para1').style.display = "inline";
+		document.getElementById('para2').style.display = "none";
 
 		document.getElementById('hint').style.display = "inline";
 		document.getElementById('reset').style.display = "inline";
@@ -278,9 +279,10 @@ window.onload = function () {
 
 	document.getElementById("text").onclick = function sign() {
 
-		document.getElementById('para').style.display = "inline";
+		document.getElementById('para1').style.display = "none";
+		document.getElementById('para2').style.display = "inline";
 
-		document.getElementById('hint').style.display = "inline";
+		document.getElementById('hint').style.display = "none";
 		document.getElementById('reset').style.display = "inline";
 		document.getElementById('bodyBox').style.display = "none";
 		
@@ -290,7 +292,7 @@ window.onload = function () {
 		document.getElementById('mylives').style.display = "inline";
 		
 		document.getElementById('catagoryName').style.display = "inline";
-		document.getElementById('clue').style.display = "inline";
+		document.getElementById('clue').style.display = "none";
 		
 		document.getElementById('hold').style.display = "inline";
 		document.getElementById('stickman').style.display = "inline";
@@ -570,7 +572,8 @@ window.onload = function () {
 	
 	document.getElementById("animation").onclick = function sign() {
 
-		document.getElementById('para').style.display = "none";
+		document.getElementById('para1').style.display = "none";
+		document.getElementById('para2').style.display = "none";
 
 		document.getElementById('hint').style.display = "none";
 		document.getElementById('reset').style.display = "none";
