@@ -41,13 +41,37 @@ window.onload = function () {
 
 	// Select Catagory
 	var selectCat = function () {
-		if (chosenCategory === categories[0]) {
-			catagoryName.innerHTML = "The Chosen Category Is Premier League Football Teams";
-		} else if (chosenCategory === categories[1]) {
-			catagoryName.innerHTML = "The Chosen Category Is Films";
-		} else if (chosenCategory === categories[2]) {
-			catagoryName.innerHTML = "The Chosen Category Is Cities";
+		// catagoryName.innerHTML = word;
+		var div = document.getElementById("catagoryName");
+		div.innerHTML = "";
+
+		for (var i = 0; i < word.length; i++) {
+			if (word[i] === "-") {
+				var myvariable = document.createTextNode(' - ');
+
+				div.appendChild(myvariable);
+			}
+			else{
+				var image=document.createElement("img");
+				image.src="./images/"+word[i]+".png";
+				//image.width="20";
+				image.height="50";
+				div.appendChild(image);
+			}
+
+			// if (word[i] === geuss) {
+			// 	geusses[i].innerHTML = geuss;
+			// 	counter += 1;
+			// }
 		}
+
+		// if (chosenCategory === categories[0]) {
+		// 	catagoryName.innerHTML = "<img src=\"./images/a.png\" width=\"40px\" height=\"75px\">";
+		// } else if (chosenCategory === categories[1]) {
+		// 	catagoryName.innerHTML = "The Chosen Category Is Films";
+		// } else if (chosenCategory === categories[2]) {
+		// 	catagoryName.innerHTML = "The Chosen Category Is Cities";
+		// }
 	}
 
 	// Create geusses ul
