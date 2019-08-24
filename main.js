@@ -1,6 +1,10 @@
 window.onload = function () {
 
 	document.getElementById("sign").onclick = function sign() {
+
+		document.getElementById('hint').style.display = "inline";
+		document.getElementById('reset').style.display = "inline";
+
 		// alert("hello");
 		var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
 			'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
@@ -22,7 +26,7 @@ window.onload = function () {
 		var getHint = document.getElementById("hint");
 		var showClue = document.getElementById("clue");
 
-
+		showClue.innerHTML = "";
 
 		// create alphabet ul
 		var buttons = function () {
@@ -261,6 +265,10 @@ window.onload = function () {
 	};
 
 	document.getElementById("text").onclick = function sign() {
+
+		document.getElementById('hint').style.display = "inline";
+		document.getElementById('reset').style.display = "inline";
+
 		// alert("hello");
 		var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
 			'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
@@ -281,6 +289,8 @@ window.onload = function () {
 		var showCatagory = document.getElementById("scatagory");
 		var getHint = document.getElementById("hint");
 		var showClue = document.getElementById("clue");
+
+		showClue.innerHTML = "";
 
 		function shuffle(array) {
 			var currentIndex = array.length, temporaryValue, randomIndex;
