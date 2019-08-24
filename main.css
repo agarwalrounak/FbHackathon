@@ -155,7 +155,7 @@ button:hover {
 	position : absolute;
 	z-index: 3;
 	top : 550px;
-	right : 690px;
+	right : 48%;
 	-webkit-transition: opacity 1s ease-in-out;
 	  -moz-transition: opacity 1s ease-in-out;
 	  -o-transition: opacity 1s ease-in-out;

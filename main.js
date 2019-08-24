@@ -586,7 +586,7 @@ window.onload = function () {
 			word = word.value;
 			
 			var wordAnimation = document.getElementById("wordAnim");
-			wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/"+word[0]+".png\" width=\"50px\" height=\"50px\">";
+			wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/"+word[0]+".png\" width=\"60px\" height=\"70px\">";
 			
 			
 			var i = 1;        
@@ -601,7 +601,7 @@ window.onload = function () {
 			      if (i < word.length) {  
 	     				var wordAnimation = document.getElementById("wordAnim");
 						if(word[i]===' '){
-		     				wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/space.png\" width=\"50px\" height=\"50px\">";
+		     				wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/space.png\" width=\"60px\" height=\"70px\">";
 							
 						} else if(word[i-1]===word[i] && count===0 ){
 							wordAnimation.innerHTML ="<span> </span>";
@@ -609,7 +609,7 @@ window.onload = function () {
 							i--;
 						} else {
 							count=0;
-	     				    wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/"+word[i]+".png\" width=\"50px\" height=\"50px\">";
+	     				    wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/"+word[i]+".png\" width=\"60px\" height=\"70px\">";
 							//wordAnimation.innerHTML="<span> </span>";
 						}
 						
@@ -621,7 +621,7 @@ window.onload = function () {
 			   }, 1000)
 			}
 
-			myLoop();  
+			myLoop();
 			
 			// for (var i = 0; i < word.length; i++) {
 // 				var wordAnimation = document.getElementById("wordAnim");
