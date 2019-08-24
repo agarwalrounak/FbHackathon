@@ -2,6 +2,8 @@ window.onload = function () {
 
 	document.getElementById("sign").onclick = function sign() {
 
+		document.getElementById('para').style.display = "inline";
+
 		document.getElementById('hint').style.display = "inline";
 		document.getElementById('reset').style.display = "inline";
 		document.getElementById('bodyBox').style.display = "none";
@@ -53,7 +55,7 @@ window.onload = function () {
 				myButtons.appendChild(letters);
 				letters.appendChild(list);
 			}
-		}
+		};
 
 
 		// Select Catagory
@@ -89,7 +91,7 @@ window.onload = function () {
 			// } else if (chosenCategory === categories[2]) {
 			// 	catagoryName.innerHTML = "The Chosen Category Is Cities";
 			// }
-		}
+		};
 
 		// Create geusses ul
 		result = function () {
@@ -112,7 +114,7 @@ window.onload = function () {
 				wordHolder.appendChild(correct);
 				correct.appendChild(guess);
 			}
-		}
+		};
 
 		// Show lives
 		comments = function () {
@@ -125,13 +127,13 @@ window.onload = function () {
 					showLives.innerHTML = "You Win!";
 				}
 			}
-		}
+		};
 
 		// Animate man
 		var animate = function () {
 			var drawMe = lives ;
 			drawArray[drawMe]();
-		}
+		};
 
 
 		// Hangman
@@ -150,14 +152,14 @@ window.onload = function () {
 			context.beginPath();
 			context.arc(60, 25, 10, 0, Math.PI*2, true);
 			context.stroke();
-		}
+		};
 
 		draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
 
 			context.moveTo($pathFromx, $pathFromy);
 			context.lineTo($pathTox, $pathToy);
 			context.stroke();
-		}
+		};
 
 		frame1 = function() {
 			draw (0, 150, 150, 150);
@@ -219,7 +221,7 @@ window.onload = function () {
 					comments();
 				}
 			}
-		}
+		};
 
 
 		// Play
@@ -244,7 +246,7 @@ window.onload = function () {
 			comments();
 			selectCat();
 			canvas();
-		}
+		};
 
 		play();
 
@@ -275,6 +277,8 @@ window.onload = function () {
 	};
 
 	document.getElementById("text").onclick = function sign() {
+
+		document.getElementById('para').style.display = "inline";
 
 		document.getElementById('hint').style.display = "inline";
 		document.getElementById('reset').style.display = "inline";
@@ -378,7 +382,7 @@ window.onload = function () {
 			// } else if (chosenCategory === categories[2]) {
 			// 	catagoryName.innerHTML = "The Chosen Category Is Cities";
 			// }
-		}
+		};
 
 		// Create geusses ul
 		result = function () {
@@ -565,6 +569,8 @@ window.onload = function () {
 	};
 	
 	document.getElementById("animation").onclick = function sign() {
+
+		document.getElementById('para').style.display = "none";
 
 		document.getElementById('hint').style.display = "none";
 		document.getElementById('reset').style.display = "none";

@@ -10,13 +10,13 @@
   <div class="wrapper">
 <!--    <h1>Hangman</h1>-->
     <br>
-    <h2>Learn sign language by playing a Hangman Game</h2>
-    <p>Use the alphabet below to guess the word, or click hint to get a clue. </p>
+    <h2>Learn sign language by playing a Hangman Game or by Animations</h2>
   </div>
   <button type="button" id="sign">Sign to Text</button>
   <button type="button" id="text">Text to Sign</button>
   <button type="button" id="animation">Text to Animation</button>
   <div class="wrapper">
+    <p id="para" style="display:none;">Use the alphabet below to guess the word, or click hint to get a clue. </p>
     <div id="buttons">
     </div>
     <div id="catagoryName"></div>
@@ -34,6 +34,7 @@
 	  <div id="bodyBox" style="display:none"> 
 		<img id="bodyImg" src="images/body.png" />  </br>
 		<div id="wordAnim"></div>
+        <br/>
 	  <input type='text' id='boxInput'/>
 	  <input type="button" id="play" value="Play" />
   </div>
