@@ -14,6 +14,7 @@
   </div>
   <button type="button" id="sign">Sign to Text</button>
   <button type="button" id="text">Text to Sign</button>
+  <button type="button" id="animation">Text to Animation</button>
   <div class="wrapper">
     <div id="buttons">
     </div>
@@ -21,11 +22,20 @@
     <div id="hold">
     </div>
     <p id="mylives"></p>
+</br>
     <p id="clue"></p>
+</br>
+
     <canvas id="stickman">This Text will show if the Browser does NOT support HTML5 Canvas tag</canvas>
     <div class="container">
       <button id="hint" style="display:none;">Hint</button>
       <button id="reset" style="display:none;">Play again</button>
+	  <div id="bodyBox" style="display:none"> 
+		<img id="bodyImg" src="images/body.png" />  </br>
+		<div id="wordAnim"></div>
+	  <input type='text' id='boxInput'/>
+	  <input type="button" id="play" value="Play" />
+  </div>
     </div>
   </div>
   <script type="text/javascript" src="main.js"></script>
