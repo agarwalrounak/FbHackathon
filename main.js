@@ -588,16 +588,32 @@ window.onload = function () {
 			var wordAnimation = document.getElementById("wordAnim");
 			wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/"+word[0]+".png\" width=\"50px\" height=\"50px\">";
 			
-			var i = 1;                     //  set your counter to 1
+			
+			var i = 1;        
+			count = 0;             //  set your counter to 1
 
 			function myLoop () {           //  create a loop function
 			   setTimeout(function () {    //  call a 3s setTimeout when the loop is called
    				
 			               //  your code here
+				   //count=0;
 			                          //  increment the counter
 			      if (i < word.length) {  
 	     				var wordAnimation = document.getElementById("wordAnim");
-	     				wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/"+word[i]+".png\" width=\"50px\" height=\"50px\">";
+						if(word[i]===' '){
+		     				wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/space.png\" width=\"50px\" height=\"50px\">";
+							
+						} else if(word[i-1]===word[i] && count===0 ){
+							wordAnimation.innerHTML ="<span> </span>";
+							count = 1 ;
+							i--;
+						} else {
+							count=0;
+	     				    wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/"+word[i]+".png\" width=\"50px\" height=\"50px\">";
+							//wordAnimation.innerHTML="<span> </span>";
+						}
+						
+												
 						i++; 
 					            //  if the counter < 10, call the loop function
 			         myLoop();             //  ..  again which will trigger another 

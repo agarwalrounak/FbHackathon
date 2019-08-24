@@ -154,6 +154,10 @@ button:hover {
 #wordImg {
 	position : absolute;
 	z-index: 3;
-	top : 520px;
+	top : 550px;
 	right : 690px;
+	-webkit-transition: opacity 1s ease-in-out;
+	  -moz-transition: opacity 1s ease-in-out;
+	  -o-transition: opacity 1s ease-in-out;
+	  transition: opacity 1s ease-in-out;
 }
