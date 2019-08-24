@@ -1,206 +1,235 @@
+window.onload = function () {
 
-// Copyright 2011 William Malone (www.williammalone.com)
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+	var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+		'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+		't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-var canvas;
-var context;
-var images = {};
-var totalResources = 9;
-var numResourcesLoaded = 0;
-var fps = 30;
-var charX = 245;
-var charY = 185;
-var breathInc = 0.1;
-var breathDir = 1;
-var breathAmt = 0;
-var breathMax = 2;
-var breathInterval = setInterval(updateBreath, 1000 / fps);
-var maxEyeHeight = 14;
-var curEyeHeight = maxEyeHeight;
-var eyeOpenTime = 0;
-var timeBtwBlinks = 4000;
-var blinkUpdateTime = 200;                    
-var blinkTimer = setInterval(updateBlink, blinkUpdateTime);
-var fpsInterval = setInterval(updateFPS, 1000);
-var numFramesDrawn = 0;
-var curFPS = 0;
-var jumping = false;
+	var categories;         // Array of topics
+	var chosenCategory;     // Selected catagory
+	var getHint ;          // Word getHint
+	var word ;              // Selected word
+	var guess ;             // Geuss
+	var geusses = [ ];      // Stored geusses
+	var lives ;             // Lives
+	var counter ;           // Count correct geusses
+	var space;              // Number of spaces in word '-'
 
-function updateFPS() {
-	
-	curFPS = numFramesDrawn;
-	numFramesDrawn = 0;
-}
-function prepareCanvas(canvasDiv, canvasWidth, canvasHeight)
-{
-	// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
-	canvas = document.createElement('canvas');
-	canvas.setAttribute('width', canvasWidth);
-	canvas.setAttribute('height', canvasHeight);
-	canvas.setAttribute('id', 'canvas');
-	canvasDiv.appendChild(canvas);
-	
-	if(typeof G_vmlCanvasManager != 'undefined') {
-		canvas = G_vmlCanvasManager.initElement(canvas);
+	// Get elements
+	var showLives = document.getElementById("mylives");
+	var showCatagory = document.getElementById("scatagory");
+	var getHint = document.getElementById("hint");
+	var showClue = document.getElementById("clue");
+
+
+
+	// create alphabet ul
+	var buttons = function () {
+		myButtons = document.getElementById('buttons');
+		letters = document.createElement('ul');
+
+		for (var i = 0; i < alphabet.length; i++) {
+			letters.id = 'alphabet';
+			list = document.createElement('li');
+			list.id = 'letter';
+			list.innerHTML = alphabet[i];
+			check();
+			myButtons.appendChild(letters);
+			letters.appendChild(list);
+		}
 	}
-	context = canvas.getContext("2d"); // Grab the 2d canvas context
-	// Note: The above code is a workaround for IE 8and lower. Otherwise we could have used:
-	//     context = document.getElementById('canvas').getContext("2d");
-	
-	canvas.width = canvas.width; // clears the canvas 
-	context.fillText("loading...", 40, 140);
-	
-	loadImage("leftArm");
-	loadImage("legs");
-	loadImage("torso");
-	loadImage("rightArm");
-	loadImage("head");
-	loadImage("hair");		
-	loadImage("leftArm-jump");
-	loadImage("legs-jump");
-	loadImage("rightArm-jump");
-}
 
-function loadImage(name) {
 
-  images[name] = new Image();
-  images[name].onload = function() { 
-	  resourceLoaded();
-  }
-  images[name].src = "images/" + name + ".png";
-}
-
-function resourceLoaded() {
-
-  numResourcesLoaded += 1;
-  if(numResourcesLoaded === totalResources) {
-  
-	setInterval(redraw, 1000 / fps);
-  }
-}
-
-function redraw() {
-
-  var x = charX;
-  var y = charY;
-  var jumpHeight = 45;
-  
-  canvas.width = canvas.width; // clears the canvas 
-
-  // Draw shadow
-  if (jumping) {
-	drawEllipse(x + 40, y + 29, 100 - breathAmt, 4);
-  } else {
-	drawEllipse(x + 40, y + 29, 160 - breathAmt, 6);
-  }
-  
-  if (jumping) {
-	y -= jumpHeight;
-  }
-
-  if (jumping) {
-	context.drawImage(images["leftArm-jump"], x + 40, y - 42 - breathAmt);
-  } else {
-	context.drawImage(images["leftArm"], x + 40, y - 42 - breathAmt);
-  }
-  
-  if (jumping) {
-	context.drawImage(images["legs-jump"], x, y- 6);
-  } else {
-	context.drawImage(images["legs"], x, y);
-  }
-	
-  context.drawImage(images["torso"], x, y - 50);
-  context.drawImage(images["head"], x - 10, y - 125 - breathAmt);
-  context.drawImage(images["hair"], x - 37, y - 138 - breathAmt);
-  
-  if (jumping) {
-	context.drawImage(images["rightArm-jump"], x - 35, y - 42 - breathAmt);
-  } else {
-	context.drawImage(images["rightArm"], x - 15, y - 42 - breathAmt);
-  }
-	
-  drawEllipse(x + 47, y - 68 - breathAmt, 8, curEyeHeight); // Left Eye
-  drawEllipse(x + 58, y - 68 - breathAmt, 8, curEyeHeight); // Right Eye
-}
-
-function drawEllipse(centerX, centerY, width, height) {
-
-  context.beginPath();
-  
-  context.moveTo(centerX, centerY - height/2);
-  
-  context.bezierCurveTo(
-	centerX + width/2, centerY - height/2,
-	centerX + width/2, centerY + height/2,
-	centerX, centerY + height/2);
-
-  context.bezierCurveTo(
-	centerX - width/2, centerY + height/2,
-	centerX - width/2, centerY - height/2,
-	centerX, centerY - height/2);
- 
-  context.fillStyle = "black";
-  context.fill();
-  context.closePath();	
-}
-
-function updateBreath() { 
-				
-  if (breathDir === 1) {  // breath in
-	breathAmt -= breathInc;
-	if (breathAmt < -breathMax) {
-	  breathDir = -1;
+	// Select Catagory
+	var selectCat = function () {
+		if (chosenCategory === categories[0]) {
+			catagoryName.innerHTML = "The Chosen Category Is Premier League Football Teams";
+		} else if (chosenCategory === categories[1]) {
+			catagoryName.innerHTML = "The Chosen Category Is Films";
+		} else if (chosenCategory === categories[2]) {
+			catagoryName.innerHTML = "The Chosen Category Is Cities";
+		}
 	}
-  } else {  // breath out
-	breathAmt += breathInc;
-	if(breathAmt > breathMax) {
-	  breathDir = 1;
+
+	// Create geusses ul
+	result = function () {
+		wordHolder = document.getElementById('hold');
+		correct = document.createElement('ul');
+
+		for (var i = 0; i < word.length; i++) {
+			correct.setAttribute('id', 'my-word');
+			guess = document.createElement('li');
+			guess.setAttribute('class', 'guess');
+			if (word[i] === "-") {
+				guess.innerHTML = "-";
+				space = 1;
+			} else {
+				guess.innerHTML = "_";
+			}
+
+			geusses.push(guess);
+			wordHolder.appendChild(correct);
+			correct.appendChild(guess);
+		}
 	}
-  }
+
+	// Show lives
+	comments = function () {
+		showLives.innerHTML = "You have " + lives + " lives";
+		if (lives < 1) {
+			showLives.innerHTML = "Game Over";
+		}
+		for (var i = 0; i < geusses.length; i++) {
+			if (counter + space === geusses.length) {
+				showLives.innerHTML = "You Win!";
+			}
+		}
+	}
+
+	// Animate man
+	var animate = function () {
+		var drawMe = lives ;
+		drawArray[drawMe]();
+	}
+
+
+	// Hangman
+	canvas =  function(){
+
+		myStickman = document.getElementById("stickman");
+		context = myStickman.getContext('2d');
+		context.beginPath();
+		context.strokeStyle = "#fff";
+		context.lineWidth = 2;
+	};
+
+	head = function(){
+		myStickman = document.getElementById("stickman");
+		context = myStickman.getContext('2d');
+		context.beginPath();
+		context.arc(60, 25, 10, 0, Math.PI*2, true);
+		context.stroke();
+	}
+
+	draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
+
+		context.moveTo($pathFromx, $pathFromy);
+		context.lineTo($pathTox, $pathToy);
+		context.stroke();
+	}
+
+	frame1 = function() {
+		draw (0, 150, 150, 150);
+	};
+
+	frame2 = function() {
+		draw (10, 0, 10, 600);
+	};
+
+	frame3 = function() {
+		draw (0, 5, 70, 5);
+	};
+
+	frame4 = function() {
+		draw (60, 5, 60, 15);
+	};
+
+	torso = function() {
+		draw (60, 36, 60, 70);
+	};
+
+	rightArm = function() {
+		draw (60, 46, 100, 50);
+	};
+
+	leftArm = function() {
+		draw (60, 46, 20, 50);
+	};
+
+	rightLeg = function() {
+		draw (60, 70, 100, 100);
+	};
+
+	leftLeg = function() {
+		draw (60, 70, 20, 100);
+	};
+
+	drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1];
+
+
+	// OnClick Function
+	check = function () {
+		list.onclick = function () {
+			var geuss = (this.innerHTML);
+			this.setAttribute("class", "active");
+			this.onclick = null;
+			for (var i = 0; i < word.length; i++) {
+				if (word[i] === geuss) {
+					geusses[i].innerHTML = geuss;
+					counter += 1;
+				}
+			}
+			var j = (word.indexOf(geuss));
+			if (j === -1) {
+				lives -= 1;
+				comments();
+				animate();
+			} else {
+				comments();
+			}
+		}
+	}
+
+
+	// Play
+	play = function () {
+		categories = [
+			["everton", "liverpool", "swansea", "chelsea", "hull", "manchester-city", "newcastle-united"],
+			["alien", "dirty-harry", "gladiator", "finding-nemo", "jaws"],
+			["manchester", "milan", "madrid", "amsterdam", "prague"]
+		];
+
+		chosenCategory = categories[Math.floor(Math.random() * categories.length)];
+		word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
+		word = word.replace(/\s/g, "-");
+		console.log(word);
+		buttons();
+
+		geusses = [ ];
+		lives = 10;
+		counter = 0;
+		space = 0;
+		result();
+		comments();
+		selectCat();
+		canvas();
+	}
+
+	play();
+
+	// Hint
+
+	hint.onclick = function() {
+
+		hints = [
+			["Based in Mersyside", "Based in Mersyside", "First Welsh team to reach the Premier Leauge", "Owned by A russian Billionaire", "Once managed by Phil Brown", "2013 FA Cup runners up", "Gazza's first club"],
+			["Science-Fiction horror film", "1971 American action film", "Historical drama", "Anamated Fish", "Giant great white shark"],
+			["Northern city in the UK", "Home of AC and Inter", "Spanish capital", "Netherlands capital", "Czech Republic capital"]
+		];
+
+		var catagoryIndex = categories.indexOf(chosenCategory);
+		var hintIndex = chosenCategory.indexOf(word);
+		showClue.innerHTML = "Clue: - " +  hints [catagoryIndex][hintIndex];
+	};
+
+	// Reset
+
+	document.getElementById('reset').onclick = function() {
+		correct.parentNode.removeChild(correct);
+		letters.parentNode.removeChild(letters);
+		showClue.innerHTML = "";
+		context.clearRect(0, 0, 400, 400);
+		play();
+	}
 }
 
-function updateBlink() { 
-				
-  eyeOpenTime += blinkUpdateTime;
-	
-  if(eyeOpenTime >= timeBtwBlinks){
-	blink();
-  }
-}
 
-function blink() {
-
-  curEyeHeight -= 1;
-  if (curEyeHeight <= 0) {
-	eyeOpenTime = 0;
-	curEyeHeight = maxEyeHeight;
-  } else {
-	setTimeout(blink, 10);
-  }
-}
-
-function jump() {
-	
-  if (!jumping) {
-	jumping = true;
-	setTimeout(land, 500);
-  }
-
-}
-function land() {
-	
-  jumping = false;
-
-}
