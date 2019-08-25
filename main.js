@@ -616,6 +616,7 @@ window.onload = function () {
 			
 			word = word.value;
 			
+			
 			var wordAnimation = document.getElementById("wordAnim");
 			wordAnimation.innerHTML = "<img id='wordImg' src=\"./images/"+word[0]+".png\" width=\"60px\" height=\"70px\">";
 			
@@ -680,11 +681,10 @@ window.onload = function () {
 // 				// }
 // 			}
 			
-			
+		
 		};
 		
 		
-
 		// alert("hello");
 		var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
 			'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
